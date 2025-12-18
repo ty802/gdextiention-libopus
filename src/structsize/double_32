@@ -1,0 +1,200 @@
+#define GDNilSIZE 0
+typedef struct
+{
+  uint8_t data[GDNilSIZE];
+} GDNil;
+#define GDboolSIZE 1
+typedef struct
+{
+  uint8_t data[GDboolSIZE];
+} GDbool;
+#define GDintSIZE 8
+typedef struct
+{
+  uint8_t data[GDintSIZE];
+} GDint;
+#define GDfloatSIZE 8
+typedef struct
+{
+  uint8_t data[GDfloatSIZE];
+} GDfloat;
+#define GDStringSIZE 4
+typedef struct
+{
+  uint8_t data[GDStringSIZE];
+} GDString;
+#define GDVector2SIZE 16
+typedef struct
+{
+  uint8_t data[GDVector2SIZE];
+} GDVector2;
+#define GDVector2iSIZE 8
+typedef struct
+{
+  uint8_t data[GDVector2iSIZE];
+} GDVector2i;
+#define GDRect2SIZE 32
+typedef struct
+{
+  uint8_t data[GDRect2SIZE];
+} GDRect2;
+#define GDRect2iSIZE 16
+typedef struct
+{
+  uint8_t data[GDRect2iSIZE];
+} GDRect2i;
+#define GDVector3SIZE 24
+typedef struct
+{
+  uint8_t data[GDVector3SIZE];
+} GDVector3;
+#define GDVector3iSIZE 12
+typedef struct
+{
+  uint8_t data[GDVector3iSIZE];
+} GDVector3i;
+#define GDTransform2DSIZE 48
+typedef struct
+{
+  uint8_t data[GDTransform2DSIZE];
+} GDTransform2D;
+#define GDVector4SIZE 32
+typedef struct
+{
+  uint8_t data[GDVector4SIZE];
+} GDVector4;
+#define GDVector4iSIZE 16
+typedef struct
+{
+  uint8_t data[GDVector4iSIZE];
+} GDVector4i;
+#define GDPlaneSIZE 32
+typedef struct
+{
+  uint8_t data[GDPlaneSIZE];
+} GDPlane;
+#define GDQuaternionSIZE 32
+typedef struct
+{
+  uint8_t data[GDQuaternionSIZE];
+} GDQuaternion;
+#define GDAABBSIZE 48
+typedef struct
+{
+  uint8_t data[GDAABBSIZE];
+} GDAABB;
+#define GDBasisSIZE 72
+typedef struct
+{
+  uint8_t data[GDBasisSIZE];
+} GDBasis;
+#define GDTransform3DSIZE 96
+typedef struct
+{
+  uint8_t data[GDTransform3DSIZE];
+} GDTransform3D;
+#define GDProjectionSIZE 128
+typedef struct
+{
+  uint8_t data[GDProjectionSIZE];
+} GDProjection;
+#define GDColorSIZE 16
+typedef struct
+{
+  uint8_t data[GDColorSIZE];
+} GDColor;
+#define GDStringNameSIZE 4
+typedef struct
+{
+  uint8_t data[GDStringNameSIZE];
+} GDStringName;
+#define GDNodePathSIZE 4
+typedef struct
+{
+  uint8_t data[GDNodePathSIZE];
+} GDNodePath;
+#define GDRIDSIZE 8
+typedef struct
+{
+  uint8_t data[GDRIDSIZE];
+} GDRID;
+#define GDObjectSIZE 4
+typedef struct
+{
+  uint8_t data[GDObjectSIZE];
+} GDObject;
+#define GDCallableSIZE 16
+typedef struct
+{
+  uint8_t data[GDCallableSIZE];
+} GDCallable;
+#define GDSignalSIZE 16
+typedef struct
+{
+  uint8_t data[GDSignalSIZE];
+} GDSignal;
+#define GDDictionarySIZE 4
+typedef struct
+{
+  uint8_t data[GDDictionarySIZE];
+} GDDictionary;
+#define GDArraySIZE 4
+typedef struct
+{
+  uint8_t data[GDArraySIZE];
+} GDArray;
+#define GDPackedByteArraySIZE 8
+typedef struct
+{
+  uint8_t data[GDPackedByteArraySIZE];
+} GDPackedByteArray;
+#define GDPackedInt32ArraySIZE 8
+typedef struct
+{
+  uint8_t data[GDPackedInt32ArraySIZE];
+} GDPackedInt32Array;
+#define GDPackedInt64ArraySIZE 8
+typedef struct
+{
+  uint8_t data[GDPackedInt64ArraySIZE];
+} GDPackedInt64Array;
+#define GDPackedFloat32ArraySIZE 8
+typedef struct
+{
+  uint8_t data[GDPackedFloat32ArraySIZE];
+} GDPackedFloat32Array;
+#define GDPackedFloat64ArraySIZE 8
+typedef struct
+{
+  uint8_t data[GDPackedFloat64ArraySIZE];
+} GDPackedFloat64Array;
+#define GDPackedStringArraySIZE 8
+typedef struct
+{
+  uint8_t data[GDPackedStringArraySIZE];
+} GDPackedStringArray;
+#define GDPackedVector2ArraySIZE 8
+typedef struct
+{
+  uint8_t data[GDPackedVector2ArraySIZE];
+} GDPackedVector2Array;
+#define GDPackedVector3ArraySIZE 8
+typedef struct
+{
+  uint8_t data[GDPackedVector3ArraySIZE];
+} GDPackedVector3Array;
+#define GDPackedColorArraySIZE 8
+typedef struct
+{
+  uint8_t data[GDPackedColorArraySIZE];
+} GDPackedColorArray;
+#define GDPackedVector4ArraySIZE 8
+typedef struct
+{
+  uint8_t data[GDPackedVector4ArraySIZE];
+} GDPackedVector4Array;
+#define GDVariantSIZE 40
+typedef struct
+{
+  uint8_t data[GDVariantSIZE];
+} GDVariant;

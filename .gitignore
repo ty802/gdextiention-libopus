@@ -6,7 +6,7 @@
 *.lo
 *.o
 *.obj
-
+*.os
 # Precompiled Headers
 *.gch
 *.pch
@@ -39,3 +39,14 @@
 
 # debug information files
 *.dwo
+
+#deps
+subprojects/packagecache
+subprojects/opus*
+
+#build 
+build/
+
+#Other
+compile_commands.json
+.cache/
