@@ -5,6 +5,8 @@
 #define GDE_EXPORT __declspec(dllexport)
 #elif defined(__GNUC__)
 #define GDE_EXPORT __attribute__((visibility("default")))
+#elif defined __clang__
+#define GDE_EXPORT
 #else
 #define GDE_EXPORT
 #endif

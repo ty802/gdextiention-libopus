@@ -1,4 +1,5 @@
 #pragma once
+#include <stdint.h>
 #ifdef BUILD_32
 #if USE_DOUBLE_PRECISION
 #include "structsize/llouble_32"

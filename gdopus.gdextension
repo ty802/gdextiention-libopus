@@ -1,0 +1,9 @@
+[configuration]
+
+entry_symbol = "cpp_init"
+compatibility_minimum = "4.2"
+
+[libraries]
+macos = "bin/libGDOpus.dylib"
+linux = "bin/libGDOpus.so"
+windows = "bin/GDOpus.dll"

@@ -1,0 +1,8 @@
+[wrap-file]
+source_url=https://github.com/godotengine/godot-cpp/archive/refs/tags/godot-4.5-stable.tar.gz
+source_filename=godot-4.5-stable.tar.gz
+source_hash=ac78539c0042554c494ea419549d2de88758d448721aeb0e5d41129aa87e339c
+directory=godot-cpp-godot-4.5-stable
+patch_directory=godot-cpp-overlay
+[provide]
+godot-cpp = godotcpp_dep

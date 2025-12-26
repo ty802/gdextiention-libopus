@@ -1,4 +1,4 @@
-project('GDOpus', 'c',
+project('GDOpus', 'c','cpp',
   version: '1.0',
   default_options: [
     'warning_level=2',
@@ -16,17 +16,18 @@ if host_machine.system() == 'darwin' or host_machine.system() == 'linux'
 endif
 
 # Collect all C source files from src directory
-sources = run_command('find', 'src', '-name', '*.c', '-type', 'f',
-  check: true
-).stdout().strip().split('\n')
-libopus_proj = subproject('libopus')
+libopus_proj = subproject('libopus', default_options: [
+    'default_library=static',  
+    'b_lto=true'
+  ])
 libopus_dep = libopus_proj.get_variable('opus_dep')
-# Build shared library
+gdcpp_proj = subproject('godotcpp', default_options: ['b_lto=true'])
+gdcpp_dep = gdcpp_proj.get_variable('godotcpp_dep')
 gdopus_lib = shared_library('GDOpus',
-  sources,
-  dependencies: libopus_dep,
-  include_directories: include_directories('src','External'),
-  c_args: ['-O0', '-g','-Wunused-parameter'],
-  install: true,
-  install_dir: 'bin'
+  sources : ['src/api.c','src/ihatec++/v.cpp','src/init.c','src/Opus.c','src/cpp/audio_stream_raw_opus.cpp'],
+  dependencies: [libopus_dep,gdcpp_dep],
+  include_directories: include_directories('src'),
+  c_args: ['-O0', '-g','-Wunused-parameter','-fvisibility=hidden','-fvisibility-inlines-hidden','-ffunction-sections'],
+  link_args: ['-Wl,--exclude-libs,ALL','-Wl,--gc-sections']
 )
+

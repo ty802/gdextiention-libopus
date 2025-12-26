@@ -41,8 +41,9 @@
 *.dwo
 
 #deps
-subprojects/packagecache
-subprojects/opus*
+subprojects/*
+!subprojects/*.wrap
+!subprojects/packagefiles/
 
 #build 
 build/
