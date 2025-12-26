@@ -18,10 +18,9 @@ endif
 # Collect all C source files from src directory
 libopus_proj = subproject('libopus', default_options: [
     'default_library=static',  
-    'b_lto=true'
   ])
 libopus_dep = libopus_proj.get_variable('opus_dep')
-gdcpp_proj = subproject('godotcpp', default_options: ['b_lto=true'])
+gdcpp_proj = subproject('godotcpp')
 gdcpp_dep = gdcpp_proj.get_variable('godotcpp_dep')
 gdopus_lib = shared_library('GDOpus',
   sources : ['src/api.c','src/ihatec++/v.cpp','src/init.c','src/Opus.c','src/cpp/audio_stream_raw_opus.cpp'],
