@@ -7,6 +7,7 @@ project('GDOpus', 'c','cpp',
   ]
 )
 
+add_project_arguments('-std=c++17', language: 'cpp')
 # Set compiler based on platform
 cc = meson.get_compiler('c')
 if host_machine.system() == 'darwin' or host_machine.system() == 'linux'
@@ -19,6 +20,15 @@ endif
 libopus_proj = subproject('libopus', default_options: [
     'default_library=static',  
   ])
+link_args = []
+if host_machine.system() == 'darwin'  # macOS
+  link_args += ['-Wl,-dead_strip']
+elif host_machine.system() == 'linux'
+  link_args += ['-Wl,--exclude-libs,ALL', '-Wl,--gc-sections']
+elif host_machine.system() == 'windows'
+  # Windows-specific flags if needed
+  link_args += []
+endif
 libopus_dep = libopus_proj.get_variable('opus_dep')
 gdcpp_proj = subproject('godotcpp')
 gdcpp_dep = gdcpp_proj.get_variable('godotcpp_dep')
@@ -27,6 +37,6 @@ gdopus_lib = shared_library('GDOpus',
   dependencies: [libopus_dep,gdcpp_dep],
   include_directories: include_directories('src'),
   c_args: ['-O0', '-g','-fvisibility=hidden','-fvisibility-inlines-hidden','-ffunction-sections'],
-  link_args: ['-Wl,--exclude-libs,ALL','-Wl,--gc-sections']
+  link_args: link_args
 )
 
