@@ -26,7 +26,7 @@ gdopus_lib = shared_library('GDOpus',
   sources : ['src/api.c','src/ihatec++/v.cpp','src/init.c','src/Opus.c','src/cpp/audio_stream_raw_opus.cpp'],
   dependencies: [libopus_dep,gdcpp_dep],
   include_directories: include_directories('src'),
-  c_args: ['-O0', '-g','-Wunused-parameter','-fvisibility=hidden','-fvisibility-inlines-hidden','-ffunction-sections'],
+  c_args: ['-O0', '-g','-fvisibility=hidden','-fvisibility-inlines-hidden','-ffunction-sections'],
   link_args: ['-Wl,--exclude-libs,ALL','-Wl,--gc-sections']
 )
 
