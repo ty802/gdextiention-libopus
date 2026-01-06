@@ -1,13 +1,11 @@
 #include "opus_classes.h"
 #include "api.h"
 #include "defs.h"
-#include "godot.h"
-#include "opus_defines.h"
-#include "opus_types.h"
 #include "structsize.h"
 #include <stdio.h>
 #include <opus.h>
 #include <stddef.h>
+#include "ihatec++/v.h"
 const GDExtensionInstanceBindingCallbacks opus_decoder_callbacks = {
     .create_callback = NULL, .free_callback = NULL, .reference_callback = NULL};
 GDStringName opus_decoder_classname() {
@@ -47,6 +45,15 @@ void opus_decoder_class_free_instance(A_Unused void *p_class_userdata,
     api.free(typed->decoder);
   }
 }
-GDPackedByteArray opus_decoder_get_data(opus_decoder *self,
-                                                void *input) {
+GDPackedVector2Array opus_decoder_get_data(opus_decoder *self,
+                                                void *input,int expectedlen) {
+        size_t len = vec_len_byte(input);
+        const char* data = vec_data_byte(input);
+        void* resdata = api.malloc(expectedlen * sizeof(float) * 2);
+        // yes this is shit and i deserve the warning for it
+        // but also the godot docs are shit and i have no idea how do fix this
+        int err = opus_decode_float(self->decoder,(unsigned char*)data,len,resdata,expectedlen,1);
+        GDPackedVector2Array result = vec_construct_byte_from_vector2(resdata, expectedlen);
+        api.free(resdata);
+        return result;
 }

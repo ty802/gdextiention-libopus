@@ -1,15 +1,21 @@
 #include "../structsize.h"
 #include "defs.h"
-#include "gdextension_interface.h"
-#include "godot_cpp/godot.hpp"
 #include "interanltypes.h"
 #include <cstddef>
 #include <cstring>
-#include <godot_cpp/templates/vector.hpp>
 #include <stddef.h>
-#include "c.h"
+HEADER_SUPRESS
+#include "godot_cpp/godot.hpp"
+#include <godot_cpp/templates/vector.hpp>
+#include "godot_cpp/variant/vector2.hpp"
+#include <godot_cpp/core/error_macros.hpp>
+DIAG_pop
+#include "c.hpp"
 using namespace godot;
 extern "C" {
+void throw_str(char* error){
+        CRASH_NOW_MSG(error);
+}
 size_t vec_sizeof_Vector2() { return sizeof(Vector<Vec2>); }
 
 size_t vec_sizeof_byte() { return sizeof(Vector<char>); }
@@ -26,7 +32,14 @@ GDPackedByteArray vec_construct_byte_from_data(const char *data,
   memcpy(vec->ptrw(), data, length);
   return res;
 }
-
+GDPackedVector2Array vec_construct_byte_from_vector2(const Vector2 *data,
+                                               size_t length) {
+  GDPackedVector2Array res;
+  Vector<Vector2> *vec = new (&res) Vector<Vector2>();
+  vec->resize(length);
+  memcpy(vec->ptrw(), data, length);
+  return res;
+}
 const Vec2 *vec_data_Vector2(void *vec) {
   return static_cast<Vector<Vec2> *>(vec)->ptr();
 }
@@ -49,7 +62,11 @@ void vec_push_Vector2(void *vec, Vec2 value) {
 void init(ModuleInitializationLevel lvl){
         GdOpus_initialize(NULL,(GDExtensionInitializationLevel)lvl);
 }
-
+void dinit(ModuleInitializationLevel lvl){
+        if(lvl == ModuleInitializationLevel::MODULE_INITIALIZATION_LEVEL_CORE){
+                GdOpus_deinitialize(NULL,(GDExtensionInitializationLevel)lvl);
+        }
+}
 GDExtensionBool GDE_EXPORT cpp_init(GDExtensionInterfaceGetProcAddress p_get_proc_address,
           GDExtensionClassLibraryPtr p_library,
           GDExtensionInitialization *r_initialization) {
@@ -57,6 +74,7 @@ GDExtensionBool GDE_EXPORT cpp_init(GDExtensionInterfaceGetProcAddress p_get_pro
     load_api(p_get_proc_address);
     class_library = p_library;
     init_obj.register_initializer(&init);
+    init_obj.register_terminator(&dinit);
     init_obj.set_minimum_library_initialization_level(godot::MODULE_INITIALIZATION_LEVEL_CORE);
     init_obj.init();
     return true;

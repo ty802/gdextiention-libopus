@@ -1,6 +1,4 @@
 #pragma once
-#include "gdextension_interface.h"
-#include "godot.h"
 #include "interanltypes.h"
 #include "structsize.h"
 #include <stddef.h>
@@ -24,3 +22,6 @@ GDExtensionBool cpp_init(GDExtensionInterfaceGetProcAddress p_get_proc_address,
                          GDExtensionInitialization *r_initialization);
 const char *vec_data_byte(void *vec);
 size_t vec_len_byte(void *vec);
+GDPackedVector2Array vec_construct_byte_from_vector2(const GDVector2 *data,
+                                               size_t length);
+void throw_str(char* error);

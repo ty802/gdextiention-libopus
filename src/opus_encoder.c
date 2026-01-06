@@ -1,10 +1,7 @@
 #include "opus_classes.h"
 #include "api.h"
 #include "defs.h"
-#include "godot.h"
 #include "ihatec++/v.h"
-#include "opus_defines.h"
-#include "opus_types.h"
 #include "structsize.h"
 #include <stdio.h>
 #include <opus.h>
@@ -48,6 +45,7 @@ void opus_encoder_class_free_instance(A_Unused void *p_class_userdata,
   if (typed->encodersize > 0) {
     api.free(typed->encoder);
   }
+  api.free(typed);
 }
 GDPackedByteArray opus_encoder_get_encoded_data(opus_encoder *self,
                                                 void *input) {
@@ -58,7 +56,6 @@ GDPackedByteArray opus_encoder_get_encoded_data(opus_encoder *self,
   unsigned char *buff = api.malloc(max_result_len);
   opus_int32 resultlen = opus_encode_float(self->encoder, (float *)data, length, buff,
                                     max_result_len);
-  printf("%d\n",resultlen);
   res = vec_construct_byte_from_data((char *)buff, resultlen);
   api.free(buff);
   return res;

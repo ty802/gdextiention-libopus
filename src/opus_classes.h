@@ -1,5 +1,5 @@
 #pragma once
-#include "godot.h"
+#include <gdextension_interface.h>
 #include "structsize.h"
 #include <opus.h>
 typedef struct {
@@ -12,6 +12,9 @@ typedef struct {
   GDExtensionObjectPtr object; 
   int decodersize;
 } opus_decoder;
+typedef struct {
+
+} packet;
 void opus_encoder_class_bind_methods();
 GDExtensionObjectPtr
 opus_encoder_class_create_instance(void *p_class_userdata,
@@ -29,5 +32,5 @@ opus_decoder_class_create_instance(void *p_class_userdata,
 void opus_decoder_class_free_instance(void *p_class_userdata,
                                       GDExtensionClassInstancePtr p_instance);
 GDStringName opus_decoder_classname();
-GDPackedByteArray opus_decoder_get_encoded_data(opus_decoder *self,
-                                                void *input);
+GDPackedVector2Array opus_decoder_get_data(opus_decoder *self,
+                                                void *input,int expectedlen);

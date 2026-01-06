@@ -1,12 +1,11 @@
 #pragma once
-#include "godot.h"
 #include "structsize.h"
+#include <gdextension_interface.h>
 extern GDExtensionClassLibraryPtr class_library;
 typedef void (*GDCassDBBindEnum)(const GDStringName *p_class,
                                  const GDStringName *p_enumname,
                                  const GDStringName *p_enumvaluename,
                                  int64_t value, GDExtensionBool p_isBitfield);
-// API methods.
 
 struct Constructors {
   GDExtensionInterfaceStringNameNewWithUtf8Chars string_name_from_utf8;
@@ -22,6 +21,10 @@ struct Constructors {
       variant_from_packed_byte_array_constructor;
   GDExtensionTypeFromVariantConstructorFunc
       packed_byte_array_from_variant_constructor;
+  GDExtensionVariantFromTypeConstructorFunc box_object;
+  GDExtensionTypeFromVariantConstructorFunc unbox_object;
+  GDExtensionVariantFromTypeConstructorFunc box_bool;
+  GDExtensionVariantFromTypeConstructorFunc box_int;
 };
 
 struct Destructors {
@@ -45,10 +48,11 @@ struct API {
   GDExtensionInterfaceGetVariantToTypeConstructor
       get_variant_to_type_constructor;
   GDExtensionInterfaceVariantGetType variant_get_type;
-  GDExtensionInterfaceClassdbRegisterExtensionClassMethod classdb_register_extension_class_method;
+  GDExtensionInterfaceClassdbRegisterExtensionClassMethod
+      classdb_register_extension_class_method;
   GDStringName *nameofobject;
 };
-// Create a PropertyInfo struct.
+
 GDExtensionPropertyInfo make_property(GDExtensionVariantType type,
                                       const char *name);
 
@@ -84,3 +88,23 @@ void call_1_PackedByteArray_arg_ret_PackedVector2Array(
     void *method_userdata, GDExtensionClassInstancePtr p_instance,
     const GDExtensionConstVariantPtr *p_args, GDExtensionInt p_argument_count,
     GDExtensionVariantPtr r_return, GDExtensionCallError *p_error);
+void call_0_ret_Object(void *method_userdata,
+                       GDExtensionClassInstancePtr p_instance,
+                       const GDExtensionConstVariantPtr *p_args,
+                       GDExtensionInt p_argument_count,
+                       GDExtensionVariantPtr r_return,
+                       GDExtensionCallError *p_error);
+void call_0_ret_bool(void *method_userdata,
+                     GDExtensionClassInstancePtr p_instance,
+                     const GDExtensionConstVariantPtr *p_args,
+                     GDExtensionInt p_argument_count,
+                     GDExtensionVariantPtr r_return,
+                     GDExtensionCallError *p_error);
+void call_0_ret_int(void *method_userdata,
+                    GDExtensionClassInstancePtr p_instance,
+                    const GDExtensionConstVariantPtr *p_args,
+                    GDExtensionInt p_argument_count,
+                    GDExtensionVariantPtr r_return,
+                    GDExtensionCallError *p_error);
+GDExtensionClassCreationInfo5 class_create_info(void);
+extern const GDExtensionInstanceBindingCallbacks instance_null_callbacks;

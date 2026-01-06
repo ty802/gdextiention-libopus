@@ -1,11 +1,11 @@
 #include "opus_classes.h"
 #include "api.h"
 #include "defs.h"
-#include "gdextension_interface.h"
-#include "godot.h"
 #include "ihatec++/v.h"
 #include "structsize.h"
+#include <stdint.h>
 #include <sys/types.h>
+#include <NativeAction.h>
 struct Destructors destructors;
 struct Constructors constructors;
 struct API api;
@@ -44,7 +44,7 @@ void init_encoder() {
     const int nums[] = {8000, 12000, 16000, 24000, 48000};
     GDStringName enumbasename;
     constructors.new_stringname(&enumbasename, "OPUS_ENCODER_SAMPLE_RATE", 0);
-    for (uint i = 0; i < 5; i++) {
+    for (uint_fast8_t i = 0; i < 5; i++) {
       GDStringName valuename;
       constructors.new_stringname(&valuename, names[i], 0);
       api.bind_enum(class_library, &name, &enumbasename, &valuename, nums[i],
@@ -113,6 +113,7 @@ void GdOpus_initialize(A_Unused void *p_userdata,
   }
   init_encoder();
   init_decoder();
+  register_native_action_class();
 }
 void GdOpus_deinitialize(A_Unused void *p_userdata,
                          A_Unused GDExtensionInitializationLevel p_level) {
